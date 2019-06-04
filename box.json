@@ -1,16 +1,16 @@
 {
     "name":"cfsprocgen",
     "slug":"cfsprocgen",
-    "version":"0.5.0",
+    "version":"0.5.1",
     "author":"Jordan Clark <jordanclark@gmail.com>",
     "keywords":[
-		"stored procedure",
-		"sproc",
+        "stored procedure",
+        "sproc",
         "generate sproc"
     ],
     "shortDescription":"Generate MSSQL Stored Procedures",
     "type":"modules",
-    "location":"jordanclark/cfsprocgen#v0.5.0",
+    "location":"jordanclark/cfsprocgen#v0.5.1",
     "repository":{
         "URL":"https://github.com/jordanclark/cfsprocgen.git",
         "type":"GIT"
