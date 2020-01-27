@@ -20,6 +20,8 @@ Use of source and redistribution, with or without modification, are prohibited w
 <cfproperty name="setSuffix" type="string" default="Set" required="true" hint="Default Set Sproc Suffix">
 <cfproperty name="allSuffix" type="string" default="All" required="true" hint="Default 'All' Sproc Suffix">
 <cfproperty name="udfPrefix" type="string" default="db" required="true" hint="Default UDF Prefix">
+<cfproperty name="backupInsertSuffix" type="string" default="BackupInsert" required="true" hint="">
+<cfproperty name="backupMergeSuffix" type="string" default="BackupMerge" required="true" hint="">
 
 
 <!-----------------------------------------------------------------------------------------------------------
@@ -44,6 +46,8 @@ Use of source and redistribution, with or without modification, are prohibited w
 	<cfset this.saveSuffix = "Save">
 	<cfset this.mergeSuffix = "Merge">
 	<cfset this.udfPrefix = "db">
+	<cfset this.backupInsertSuffix = "BackupInsert">
+	<cfset this.backupMergeSuffix = "BackupMerge">
 	
 	<cfset this.stCommonArgs = {}>
 	<cfset this.nIndent = 0>
@@ -423,6 +427,7 @@ code to handle errors if they occur --->
 	<cfargument name="sColumnFilter" type="string" required="true">
 	<cfargument name="bNewLine" type="boolean" default="true">
 	<cfargument name="bDoubleTab" type="boolean" default="true">
+	<cfargument name="sPrefix" type="string" default="">
 	
 	<cfset var qColumnMetadata = this.getColumnMetadata( arguments.qMetadata, arguments.sColumnFilter )>
 	<cfset var sFieldAdd = "">
@@ -432,7 +437,7 @@ code to handle errors if they occur --->
 	</cfif>
 	
 	<cfloop query="qColumnMetadata">
-		<cfset this.append( sFieldAdd & this.sTab & qColumnMetadata.sColumnNameSafe, arguments.bNewLine )>
+		<cfset this.append( sFieldAdd & this.sTab & arguments.sPrefix & qColumnMetadata.sColumnNameSafe, arguments.bNewLine )>
 		<cfset sFieldAdd = ",">
 		<cfif arguments.bDoubleTab>
 			<cfset sFieldAdd = sFieldAdd & this.sTab>
@@ -852,6 +857,7 @@ code to handle errors if they occur --->
 	<cfset var bNullFilter = "">
 	<cfset var bLikeableFilter = false>
 	<cfset var bComputedFilter = false>
+	<cfset var bIdentityFilter = false>
 	<cfset var bCompareFilter = false>
 	<cfset var sField = "">
 	<cfset var sIncludeFields = "">
@@ -866,6 +872,10 @@ code to handle errors if they occur --->
 				<!--- only select primary key columns --->
 				<cfset bPKFilter = true>
 			<cfelseif sField IS "!MUTABLE" OR sField IS "+">
+				<!--- exclude computed and identity fields --->
+				<cfset bComputedFilter = true>
+				<cfset bIdentityFilter = true>
+			<cfelseif sField IS "!COMPUTED">
 				<!--- exclude computed and identity fields --->
 				<cfset bComputedFilter = true>
 			<cfelseif sField IS "!COMPARABLE">
@@ -892,8 +902,11 @@ code to handle errors if they occur --->
 		WHERE		(0 = 0)
 		<cfif bPKFilter>
 			AND		(bPrimaryKeyColumn = 1)
-		<cfelseif bComputedFilter>
+		<cfelse>
+		<cfif bComputedFilter>
 			AND		(isComputed = 0)
+		</cfif>
+		<cfif bIdentityFilter>
 			AND		(isIdentity = 0)
 		</cfif>
 		<cfif bCompareFilter>
@@ -911,6 +924,7 @@ code to handle errors if they occur --->
 			AND		(sColumnName IN (<cfqueryparam value="#sIncludeFields#" cfsqltype="varchar" list="true" separator=",">))
 		<cfelseif len( sExcludeFields )>
 			AND		(sColumnName NOT IN (<cfqueryparam value="#sExcludeFields#" cfsqltype="varchar" list="true" separator=",">))
+		</cfif>
 		</cfif>
 	</cfquery>
 	
