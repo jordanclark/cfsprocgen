@@ -1,7 +1,7 @@
 {
     "name":"cfsprocgen",
     "slug":"cfsprocgen",
-    "version":"0.5.1",
+    "version":"0.6.0",
     "author":"Jordan Clark <jordanclark@gmail.com>",
     "keywords":[
         "stored procedure",
@@ -10,7 +10,7 @@
     ],
     "shortDescription":"Generate MSSQL Stored Procedures",
     "type":"modules",
-    "location":"jordanclark/cfsprocgen#v0.5.1",
+    "location":"jordanclark/cfsprocgen#v0.6.0",
     "repository":{
         "URL":"https://github.com/jordanclark/cfsprocgen.git",
         "type":"GIT"
