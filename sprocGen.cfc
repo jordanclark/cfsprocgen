@@ -85,34 +85,36 @@ Use of source and redistribution, with or without modification, are prohibited w
 </cffunction>
 
 
-<cfinclude template="sproc-generator/write_definition.cfm">
-<cfinclude template="sproc-generator/generate_query_cfc2.cfm">
-<cfinclude template="sproc-generator/generate_query_tag2.cfm">
+<cfinclude template="write_definition.cfm">
+<cfinclude template="generate_query_cfc2.cfm">
+<cfinclude template="generate_query_tag2.cfm">
 
 
-<cfinclude template="sproc-generator/sql_drop_sproc.cfm">
-<cfinclude template="sproc-generator/sql_drop_function.cfm">
-<cfinclude template="sproc-generator/sql_grant_object2.cfm">
-<cfinclude template="sproc-generator/sql_set_options.cfm">
+<cfinclude template="sql_drop_sproc.cfm">
+<cfinclude template="sql_drop_function.cfm">
+<cfinclude template="sql_grant_object2.cfm">
+<cfinclude template="sql_set_options.cfm">
 
 
 <!-----------------------------------------------------------------------------------------------------------
 -- STORED PROCEDURE GENERATION METHODS
 ------------------------------------------------------------------------------------------------------------>
 
-<cfinclude template="sproc-generator/sproc_count.cfm">
-<cfinclude template="sproc-generator/sproc_delete.cfm">
-<cfinclude template="sproc-generator/sproc_delete_all.cfm">
-<cfinclude template="sproc-generator/sproc_exists.cfm">
-<cfinclude template="sproc-generator/sproc_insert.cfm">
-<cfinclude template="sproc-generator/sproc_save.cfm">
-<cfinclude template="sproc-generator/sproc_select.cfm">
-<cfinclude template="sproc-generator/sproc_select_record.cfm">
-<cfinclude template="sproc-generator/sproc_select_all.cfm">
-<cfinclude template="sproc-generator/sproc_select_set.cfm">
-<cfinclude template="sproc-generator/sproc_update.cfm">
+<cfinclude template="sproc_count.cfm">
+<cfinclude template="sproc_delete.cfm">
+<cfinclude template="sproc_delete_all.cfm">
+<cfinclude template="sproc_exists.cfm">
+<cfinclude template="sproc_insert.cfm">
+<cfinclude template="sproc_save.cfm">
+<cfinclude template="sproc_select.cfm">
+<cfinclude template="sproc_select_record.cfm">
+<cfinclude template="sproc_select_all.cfm">
+<cfinclude template="sproc_select_set.cfm">
+<cfinclude template="sproc_update.cfm">
 
-<cfinclude template="sproc-generator/sproc_merge.cfm">
+<cfinclude template="sproc_merge.cfm">
+<cfinclude template="sproc_backup_insert.cfm">
+<cfinclude template="sproc_backup_merge.cfm">
 
 
 <!-----------------------------------------------------------------------------------------------------------
@@ -1156,7 +1158,7 @@ code to handle errors if they occur --->
 	<cfset this.resetIndent()>
 	<cfset this.addBuffer( "sql_install_udfs", "sql", true )>
 	
-	<cfsavecontent variable="sCode"><cfoutput><cfinclude template="sproc-generator/install_udfs.sql"></cfoutput></cfsavecontent>
+	<cfsavecontent variable="sCode"><cfoutput><cfinclude template="install_udfs.sql"></cfoutput></cfsavecontent>
 	
 	<cfset this.append( sCode, false )>
 	
