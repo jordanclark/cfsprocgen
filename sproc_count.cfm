@@ -91,10 +91,10 @@
 	<!--- <cfset this.appendErrorCheck()> --->
 	
 	<cfset this.appendBlank()>
-	<cfset this.append( "PRINT 'Found ' + CAST( @count AS varchar(10) ) + ' Records'" )>
+	<cfset this.append( "PRINT 'Found ' + CAST( @count AS varchar(10) ) + ' Records';" )>
 	
 	<cfset this.appendBlank()>
-	<cfset this.append( "RETURN @error" )>
+	<cfset this.append( "RETURN @error;" )>
 	
 <cfset this.appendEnd()>
 <cfset this.append( "GO" )>

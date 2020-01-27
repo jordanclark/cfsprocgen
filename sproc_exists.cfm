@@ -71,7 +71,7 @@
 	<!--- <cfset this.appendVar( "spname", "sysname", "Object_Name(@@ProcID)", "Store this sproc's name" )> --->
 	
 	<!--- <cfset this.appendVar( "exists", "bit", "0" )> --->
-	<cfset this.append( "SET @exists = 1" )>
+	<cfset this.append( "SET @exists = 1;" )>
 	<cfset this.appendBlank()>
 	
 	<!--- <cfif arguments.bErrorCheck>
@@ -92,19 +92,19 @@
 	<cfset this.unindent()>
 	<cfset this.append( ")" )>
 	<cfset this.appendBegin()>
-		<cfset this.append( "SET @exists = 0" )>
-		<cfset this.append( "PRINT 'Records exist'" )>
+		<cfset this.append( "SET @exists = 0;" )>
+		<cfset this.append( "PRINT 'Records exist';" )>
 	<cfset this.appendEnd()>
 	<cfset this.append( "ELSE" )>
 	<cfset this.appendBegin()>
-		<cfset this.append( "PRINT 'Records do not exist'" )>
+		<cfset this.append( "PRINT 'Records do not exist';" )>
 	<cfset this.appendEnd()>
 	
 	<!--- <cfset this.appendBlank()>
 	<cfset this.appendErrorCheck()> --->
 	
 	<cfset this.appendBlank()>
-	<cfset this.append( "RETURN @@ERROR" )>
+	<cfset this.append( "RETURN @@ERROR;" )>
 	
 <cfset this.appendEnd()>
 <cfset this.append( "GO" )>

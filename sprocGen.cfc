@@ -175,7 +175,7 @@ Use of source and redistribution, with or without modification, are prohibited w
 
 
 <cffunction name="appendBegin" access="package" output="false">
-	<cfset this.append( "BEGIN" )>
+	<cfset this.append( "BEGIN;" )>
 	<cfset this.indent()>
 	
 	<cfreturn>
@@ -184,7 +184,7 @@ Use of source and redistribution, with or without modification, are prohibited w
 
 <cffunction name="appendEnd" access="package" output="false">
 	<cfset this.unindent()>
-	<cfset this.append( "END" )>
+	<cfset this.append( "END;" )>
 	
 	<cfreturn>
 </cffunction>
@@ -248,12 +248,12 @@ Use of source and redistribution, with or without modification, are prohibited w
 	</cfif>
 	
 	<!--- declare the variable, then set the default value if there is one --->
-	<cfset this.append( "DECLARE @#arguments.sName# #uCase( arguments.sType )#" )>
+	<cfset this.append( "DECLARE @#arguments.sName# #uCase( arguments.sType )#;" )>
 	<cfif len( arguments.sDefault )>
 		<cfif listFindNoCase( "CHAR,VARCHAR,BINARY,VARBINARY,NCHAR,NVARCHAR", arguments.sType )>
-			<cfset this.append( "SET @#arguments.sName# = '#arguments.sDefault#'" )>
+			<cfset this.append( "SET @#arguments.sName# = '#arguments.sDefault#';" )>
 		<cfelse>
-			<cfset this.append( "SET @#arguments.sName# = #arguments.sDefault#" )>
+			<cfset this.append( "SET @#arguments.sName# = #arguments.sDefault#;" )>
 		</cfif>
 	</cfif>
 	<cfset this.appendBlank()>
@@ -272,7 +272,7 @@ Use of source and redistribution, with or without modification, are prohibited w
 
 
 <cffunction name="appendNoCount" access="package" output="false">	
-	<cfset this.append( "SET NOCOUNT ON" )>
+	<cfset this.append( "SET NOCOUNT ON;" )>
 	
 	<cfreturn>
 </cffunction>
@@ -286,17 +286,17 @@ Use of source and redistribution, with or without modification, are prohibited w
 	<cfset this.append( "IF( @error != 0 )" )>
 	<cfset this.appendBegin()>
 	<cfif arguments.bTransaction>
-		<cfset this.append( "ROLLBACK TRANSACTION #sTransactionName#" )>
+		<cfset this.append( "ROLLBACK TRANSACTION #sTransactionName#;" )>
 	</cfif>
 	<!--- this is an area that could be extended --->
 	<cfset this.customErrorCheck()>
-	<cfset this.append( "RETURN 2" )>
+	<cfset this.append( "RETURN 2;" )>
 	<cfset this.appendEnd()>
 	<!--- if there is no error, but it is a transaction, then commit it --->
 	<cfif arguments.bTransaction>
 		<cfset this.append( "ELSE" )>
 		<cfset this.appendBegin()>
-		<cfset this.append( "COMMIT TRANSACTION #sTransactionName#" )>
+		<cfset this.append( "COMMIT TRANSACTION #sTransactionName#;" )>
 		<cfset this.appendEnd()>
 	</cfif>
 	
@@ -307,7 +307,7 @@ Use of source and redistribution, with or without modification, are prohibited w
 <!--- this method should be extended if you want to provide your own t-sql
 code to handle errors if they occur --->
 <cffunction name="customErrorCheck" access="package" output="false">
-	<cfset this.append( "PRINT 'Put in a custom error handler'" )>
+	<cfset this.append( "PRINT 'Put in a custom error handler';" )>
 	
 	<cfreturn>
 </cffunction>

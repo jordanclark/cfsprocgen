@@ -154,6 +154,7 @@
 		<cfif bIdentityField>
 			<cfset this.append( this.sTab & "," & this.sTab & "@pkIdentity = SCOPE_IDENTITY()" )>
 		</cfif>
+		<cfset this.append( this.sTab & ";" )>
 	<cfset this.appendEnd()>
 	
 	<cfset this.unindent()>
@@ -166,11 +167,11 @@
 	<cfset this.appendComment( "Check if any rows were effective, if not return 1 (problem)" )>
 	<cfset this.append( "IF( @rowcount = 0 )" )>
 	<cfset this.appendBegin()>
-		<cfset this.append( "RETURN 1" )>
+		<cfset this.append( "RETURN 1;" )>
 	<cfset this.appendEnd()>
 	<cfset this.appendBlank()>
 	
-	<cfset this.append( "RETURN 0" )>
+	<cfset this.append( "RETURN 0;" )>
 
 <cfset this.appendEnd()>
 <cfset this.append( "GO" )>

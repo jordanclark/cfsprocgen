@@ -90,13 +90,13 @@
 	
 	<!--- 
 	<cfset this.appendBlank()>
-	<cfset this.append( "SELECT @error = @@ERROR" )>
+	<cfset this.append( "SELECT @error = @@ERROR;" )>
 	<cfset this.appendErrorCheck()>
 	
-	<cfset this.append( "RETURN @error" )>
+	<cfset this.append( "RETURN @error;" )>
 	--->
 	
-	<cfset this.append( "RETURN @@ERROR" )>
+	<cfset this.append( "RETURN @@ERROR;" )>
 	
 <cfset this.appendEnd()>
 <cfset this.append( "GO" )>
