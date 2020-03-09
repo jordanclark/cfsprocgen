@@ -108,10 +108,10 @@
 <cfset this.addDefinition( "count", arguments, this.readBuffer( arguments.sSprocName ) )>
 
 <!--- Generate query tag at the same time --->
-<cfif structKeyExists( arguments, "sTagDir" ) AND structKeyExists( arguments, "sUdfName" )>
+<cfif structKeyExists( arguments, "sBaseCfmDir" ) AND structKeyExists( arguments, "sUdfName" )>
 	<!--- <cfset this.generateQueryTag( arguments.sSprocName, arguments.sQueryTagFileName )> --->
-	<cfset request.log( "WRITE: #arguments.sTagDir#/#arguments.sTableName#/dbg_#lCase( arguments.sTableName )#_#lCase( arguments.sUdfName )#.cfm" )>
-	<cfset this.writeDefinition( arguments.sSprocName, "#arguments.sTagDir#/#arguments.sTableName#/dbg_#lCase( arguments.sTableName )#_#lCase( arguments.sUdfName )#.cfm", "CFC" )>
+	<cfset request.log( "WRITE: #arguments.sBaseCfmDir#/#arguments.sTableName#/dbg_#lCase( arguments.sTableName )#_#lCase( arguments.sUdfName )#.cfm" )>
+	<cfset this.writeDefinition( arguments.sSprocName, "#arguments.sBaseCfmDir#/#arguments.sTableName#/dbg_#lCase( arguments.sTableName )#_#lCase( arguments.sUdfName )#.cfm", "CFC" )>
 <cfelseif structKeyExists( arguments, "sQueryTagFileName" )>
 	<!--- <cfset this.generateQueryTag( arguments.sSprocName, arguments.sQueryTagFileName )> --->
 	<cfset request.log( "WRITE: #arguments.sQueryTagFileName#" )>
